@@ -35,29 +35,33 @@ const febHolidays = [
 ];
 
 const ulEl = document.querySelector("ul");
+const d = new Date();
 let daynumber = 0;
 let activeIndex = 0;
 const rotate = -360 / febHolidays.length;
 
-// initialize
+init();
+
 function init() {
-  febHolidays.forEach((msg, idx) => {
-    const li = document.createElement("li");
-    li.style.setProperty("--day_idx", idx);
-    li.innerHTML = `<time datetime="2022-02-${idx+1}">${idx+1}</time><span>${msg}</span>`;
-    ulEl.appendChild(li);
+  febHolidays.forEach((holiday, idx) => {
+    const liEl = document.createElement("li");
+    liEl.style.setProperty("--day_idx", idx);
+    liEl.innerHTML = `<time datetime="2022-02-${idx + 1}">${idx + 1}</time><span>${holiday}</span>`;
+    ulEl.append(liEl);
   });
+
   ulEl.style.setProperty("--rotateDegrees", rotate);
   adjustDay(0);
 }
 
-// adjust active day
 function adjustDay(nr) {
   daynumber += nr;
   ulEl.style.setProperty("--currentDay", daynumber);
 
   const activeEl = document.querySelector("li.active");
-  if (activeEl) activeEl.classList.remove("active");
+  if (activeEl) {
+    activeEl.classList.remove("active");
+  }
 
   activeIndex = (activeIndex + nr + febHolidays.length) % febHolidays.length;
   const newActiveEl = document.querySelector(`li:nth-child(${activeIndex + 1})`);
@@ -66,25 +70,23 @@ function adjustDay(nr) {
   newActiveEl.classList.add("active");
 }
 
-// keyboard navigation
 window.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowUp") adjustDay(-1);
-  else if (e.key === "ArrowDown") adjustDay(1);
-});
-
-// mouse wheel navigation
+  switch (e.key) {
+    case "ArrowUp":
+      adjustDay(-1);
+      break;
+    case "ArrowDown":
+      adjustDay(1);
+      break;
+    default:
+      return;
+  }
+})
 window.addEventListener("wheel", (e) => {
-  if (e.deltaY < 0) adjustDay(-1);
-  else adjustDay(1);
+  if (e.deltaY < 0) {
+    adjustDay(-1);
+  } else {
+    adjustDay(1);
+  }
 });
-
-// mobile touch support
-let startY = 0;
-window.addEventListener("touchstart", e => startY = e.touches[0].clientY);
-window.addEventListener("touchend", e => {
-  let endY = e.changedTouches[0].clientY;
-  if (endY - startY > 30) adjustDay(-1);
-  else if (startY - endY > 30) adjustDay(1);
-});
-
-init();
+  
