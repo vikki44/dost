@@ -1,70 +1,37 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+	font-family: Arial, sans-serif;
 }
 
-/* Login form */
 #login-form {
-  width: 50%;
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background: #fff;
+	width: 50%;
+	margin: 40px auto;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Input */
 #code {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px; /* important for mobile */
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 20px;
+	border: 1px solid #ccc;
 }
 
-/* Button */
 #submit-btn {
-  width: 100%;
-  background-color: #4CAF50;
-  color: #fff;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
+	background-color: #4CAF50;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
 }
 
 #submit-btn:hover {
-  background-color: #3e8e41;
+	background-color: #3e8e41;
 }
 
-/* Result text */
 #result {
-  color: #666;
-  margin-top: 20px;
-  text-align: center;
-  font-size: 14px;
-}
-
-/* 📱 MOBILE SUPPORT */
-@media (max-width: 600px) {
-  #login-form {
-    width: 90%;
-    margin: 20px auto;
-    padding: 15px;
-  }
-
-  #code {
-    padding: 14px;
-    font-size: 16px;
-  }
-
-  #submit-btn {
-    padding: 14px;
-    font-size: 16px;
-  }
+	color: #666;
+	margin-top: 20px;
 }
