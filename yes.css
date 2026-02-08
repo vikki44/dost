@@ -8,25 +8,30 @@ body {
   min-height: 100vh;
   display: grid;
   place-items: center;
+  overflow-x: hidden;
   font-family: "Poppins", system-ui, sans-serif;
   background-color: rgb(1, 1, 1);
   color: white;
   transition: background-color 500ms ease;
 }
 
+/* ---------- HEADER ---------- */
 header {
   position: absolute;
+  z-index: 999;
+  text-align: center;
   top: 0;
   padding: 1rem;
-  text-align: center;
+  background: inherit;
 }
 
+/* ---------- CONTAINER ---------- */
 .container {
   position: relative;
   width: min(400px, 95%);
 }
 
-/* List styles */
+/* ---------- LIST ---------- */
 ul {
   list-style: none;
   width: 100%;
@@ -36,26 +41,41 @@ ul {
   transform-style: preserve-3d;
 }
 
+/* ---------- LIST ITEM ---------- */
 ul > li {
   position: absolute;
   left: 50%;
   top: calc(50% - 2.5rem);
-  --rotateX: calc(1deg * var(--rotateDegrees) * (var(--day_idx) - var(--currentDay)));
-  transform: rotateX(var(--rotateX)) translateZ(220px) translateX(-50%) scale(var(--scale, 1));
+
+  --rotateX: calc(
+    1deg * var(--rotateDegrees) * calc(var(--day_idx) - var(--currentDay))
+  );
+
+  transform:
+    rotateX(var(--rotateX))
+    translateZ(220px)
+    translateX(-50%)
+    scale(var(--scale, 1));
+
   --hue: calc(var(--rotateDegrees) * var(--day_idx));
   background-color: hsl(var(--hue), 50%, var(--lightness, 45%));
+
   width: 110%;
   min-height: 3.5rem;
   padding: 0.6rem 0.8rem;
+
   display: grid;
   grid-template-columns: 2.5rem auto;
   align-items: center;
+
   font-size: 0.85rem;
   line-height: 1.35;
   border-radius: 0.45rem;
+
   transition: transform 900ms ease, background-color 900ms ease;
 }
 
+/* ---------- ACTIVE ITEM ---------- */
 ul > li.active {
   --lightness: 30%;
   --scale: 1.15;
@@ -63,6 +83,7 @@ ul > li.active {
   box-shadow: 0 0 20px rgba(255, 150, 200, 0.45);
 }
 
+/* ---------- TIME ---------- */
 li > time {
   text-align: center;
   font-weight: 600;
@@ -70,13 +91,14 @@ li > time {
   opacity: 0.85;
 }
 
+/* ---------- TEXT ---------- */
 li > span {
   padding-left: 0.6rem;
   word-break: break-word;
   white-space: normal;
 }
 
-/* Controls */
+/* ---------- CONTROLS (DESKTOP) ---------- */
 .controls {
   position: absolute;
   top: 50%;
@@ -109,7 +131,7 @@ li > span {
   transform: scale(1.1);
 }
 
-/* Border */
+/* ---------- BORDER ---------- */
 .border {
   width: 96%;
   height: 3.2em;
@@ -121,28 +143,49 @@ li > span {
   pointer-events: none;
 }
 
-/* ================= MOBILE SUPPORT ================= */
+/* ================= 📱 MOBILE SUPPORT ================= */
 @media (max-width: 600px) {
-  .container { width: 100%; }
+  .container {
+    width: 100%;
+  }
+
+  ul {
+    perspective: 600px;
+  }
+
   ul > li {
-    transform: rotateX(var(--rotateX)) translateZ(160px) translateX(-50%) scale(var(--scale, 1));
+    width: 100%;
+    transform:
+      rotateX(var(--rotateX))
+      translateZ(160px)
+      translateX(-50%)
+      scale(var(--scale, 1));
     font-size: 0.8rem;
   }
+
   ul > li.active {
     font-size: 0.9rem;
     --scale: 1.1;
   }
+
+  /* Move controls below */
   .controls {
     position: relative;
-    flex-direction: row;
     top: auto;
     left: auto;
     transform: none;
+    flex-direction: row;
+    justify-content: center;
     margin-top: 1rem;
     gap: 1rem;
   }
+
   .controls button {
-    width: 2rem;
-    font-size: 1.5rem;
+    width: 2.2rem;
+    font-size: 1.6rem;
+  }
+
+  header {
+    font-size: 0.9rem;
   }
 }
